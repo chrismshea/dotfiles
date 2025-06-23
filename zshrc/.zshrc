@@ -58,16 +58,10 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
 
-# GO
-export GOPATH='/Users/omerxx/go'
-
-# VIM
-alias v="/Users/omerxx/.nix-profile/bin/nvim"
-
 # Nmap
 alias nm="nmap -sC -sV -oN nmap"
 
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/omer/.vimpkg/bin:${GOPATH}/bin:/Users/omerxx/.cargo/bin
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/chrisshea/.vimpkg/bin:/Users/chrisshea/.cargo/bin/:/Users/chrisshea/.local/bin/
 
 alias cl='clear'
 
@@ -100,25 +94,26 @@ alias lt="eza --tree --level=2 --long --icons --git"
 alias ltree="eza --tree --level=2  --icons --git"
 
 # SEC STUFF
-alias gobust='gobuster dir --wordlist ~/security/wordlists/diccnoext.txt --wildcard --url'
-alias dirsearch='python dirsearch.py -w db/dicc.txt -b -u'
-alias massdns='~/hacking/tools/massdns/bin/massdns -r ~/hacking/tools/massdns/lists/resolvers.txt -t A -o S bf-targets.txt -w livehosts.txt -s 4000'
-alias server='python -m http.server 4445'
-alias tunnel='ngrok http 4445'
-alias fuzz='ffuf -w ~/hacking/SecLists/content_discovery_all.txt -mc all -u'
-alias gr='~/go/src/github.com/tomnomnom/gf/gf'
+#alias gobust='gobuster dir --wordlist ~/security/wordlists/diccnoext.txt --wildcard --url'
+#alias dirsearch='python dirsearch.py -w db/dicc.txt -b -u'
+#alias massdns='~/hacking/tools/massdns/bin/massdns -r ~/hacking/tools/massdns/lists/resolvers.txt -t A -o S bf-targets.txt -w livehosts.txt -s 4000'
+#alias server='python -m http.server 4445'
+#alias tunnel='ngrok http 4445'
+#alias fuzz='ffuf -w ~/hacking/SecLists/content_discovery_all.txt -mc all -u'
+#alias gr='~/go/src/github.com/tomnomnom/gf/gf'
 
 ### FZF ###
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export PATH=/opt/homebrew/bin:$PATH
+export PATH=/usr/local/go/bin:$PATH
 
 alias mat='osascript -e "tell application \"System Events\" to key code 126 using {command down}" && tmux neww "cmatrix"'
 
 # Nix!
-export NIX_CONF_DIR=$HOME/.config/nix
-export PATH=/run/current-system/sw/bin:$PATH
+#export NIX_CONF_DIR=$HOME/.config/nix
+#export PATH=/run/current-system/sw/bin:$PATH
 
 function ranger {
 	local IFS=$'\t\n'
@@ -143,14 +138,17 @@ fcd() { cd "$(find . -type d -not -path '*/.*' | fzf)" && l; }
 f() { echo "$(find . -type f -not -path '*/.*' | fzf)" | pbcopy }
 fv() { nvim "$(find . -type f -not -path '*/.*' | fzf)" }
 
- # Nix
- if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-	 . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
- fi
- # End Nix
+# Nix
+# if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+#	 . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+# fi
+# End Nix
 
-export XDG_CONFIG_HOME="/Users/omerxx/.config"
+export XDG_CONFIG_HOME="/Users/chrisshea/.config"
 
-eval "$(zoxide init zsh)"
-eval "$(atuin init zsh)"
-eval "$(direnv hook zsh)"
+#eval "$(zoxide init zsh)"
+#eval "$(atuin init zsh)"
+#eval "$(direnv hook zsh)"
+eval "$(~/.local/bin/mise activate zsh)"
+
+alias vi=/opt/homebrew/bin/nvim
