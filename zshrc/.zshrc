@@ -9,6 +9,7 @@ source <(kubectl completion zsh)
 complete -C '/usr/local/bin/aws_completer' aws
 
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 bindkey '^w' autosuggest-execute
 bindkey '^e' autosuggest-accept
 bindkey '^u' autosuggest-toggle
@@ -61,7 +62,7 @@ alias ......="cd ../../../../.."
 # Nmap
 alias nm="nmap -sC -sV -oN nmap"
 
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/chrisshea/.vimpkg/bin:/Users/chrisshea/.cargo/bin/:/Users/chrisshea/.local/bin/
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/chrisshea/.vimpkg/bin:/Users/chrisshea/.cargo/bin/:/Users/chrisshea/.local/bin/:/Users/chrisshea/node_modules/.bin/
 
 alias cl='clear'
 
@@ -103,13 +104,22 @@ alias ltree="eza --tree --level=2  --icons --git"
 #alias gr='~/go/src/github.com/tomnomnom/gf/gf'
 
 ### FZF ###
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
+#eval "$(fzf --zsh)"
+export FZF_DEFAULT_COMMAND='fd --hidden --strip-cwd-prefix --exclude .git --exclude .vscode --exclude .local --exclude .npm --exclude Library '
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# homebrew
 export PATH=/opt/homebrew/bin:$PATH
+export PATH=/opt/homebrew/sbin:$PATH
+export PATH=/opt/homebrew/opt/php@7.4/bin:$PATH
+export PATH=/opt/homebrew/opt/php@7.4/sbin:$PATH
+export LDFLAGS=-L/opt/homebrew/opt/php@7.4/lib
+export CPPFLAGS=-I/opt/homebrew/opt/php@7.4/include
+
 export PATH=/usr/local/go/bin:$PATH
 
 alias mat='osascript -e "tell application \"System Events\" to key code 126 using {command down}" && tmux neww "cmatrix"'
+export PATH=$PATH:/usr/local/texlive/2025/bin/universal-darwin
 
 # Nix!
 #export NIX_CONF_DIR=$HOME/.config/nix
@@ -146,7 +156,7 @@ fv() { nvim "$(find . -type f -not -path '*/.*' | fzf)" }
 
 export XDG_CONFIG_HOME="/Users/chrisshea/.config"
 
-#eval "$(zoxide init zsh)"
+eval "$(zoxide init zsh)"
 #eval "$(atuin init zsh)"
 #eval "$(direnv hook zsh)"
 eval "$(~/.local/bin/mise activate zsh)"
